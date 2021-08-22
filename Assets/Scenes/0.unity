@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 51713115}
   m_Layer: 0
   m_Name: Duvar
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,7 +320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195597163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9796, y: -0.79, z: -12.76}
+  m_LocalPosition: {x: 0.9796, y: -0.79, z: -10.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 193434913}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 472796552}
   m_Layer: 0
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,8 +405,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472796549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.4, y: 3, z: 13.8590145}
-  m_LocalScale: {x: 1, y: 15.333036, z: 1}
+  m_LocalPosition: {x: 5.7, y: 3, z: 13.8590145}
+  m_LocalScale: {x: 1, y: 12.266429, z: 1}
   m_Children: []
   m_Father: {fileID: 51713115}
   m_RootOrder: 1
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 621426293}
   m_Layer: 0
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,8 +598,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621426290}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.1, y: -2.6, z: 13.8590145}
-  m_LocalScale: {x: 1, y: 24.729973, z: 1}
+  m_LocalPosition: {x: -0.74, y: -2.29, z: 13.8590145}
+  m_LocalScale: {x: 1, y: 15.463963, z: 1}
   m_Children: []
   m_Father: {fileID: 51713115}
   m_RootOrder: 3
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 672623253}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,8 +708,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672623250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.908576, y: 2.3, z: 13.8590145}
-  m_LocalScale: {x: 1, y: 15.002718, z: 1}
+  m_LocalPosition: {x: -7.84, y: 2.3, z: 13.8590145}
+  m_LocalScale: {x: 1, y: 12.939844, z: 1}
   m_Children: []
   m_Father: {fileID: 51713115}
   m_RootOrder: 0
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 1685866698}
   m_Layer: 0
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -819,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 1685866695}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -1, y: 7.9, z: 13.8590145}
-  m_LocalScale: {x: 1, y: 22.966703, z: 1}
+  m_LocalScale: {x: 1, y: 15.215442, z: 1}
   m_Children: []
   m_Father: {fileID: 51713115}
   m_RootOrder: 2
