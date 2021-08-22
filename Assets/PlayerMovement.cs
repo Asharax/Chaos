@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         {
             cord.y += Input.GetAxisRaw("Vertical") * Speed * Time.deltaTime;
         }
-        while (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
          {
             Fire();
         }
