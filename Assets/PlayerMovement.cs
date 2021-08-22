@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         {
             cord.y += Input.GetAxisRaw("Vertical") * Speed * Time.deltaTime;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Space"))
         {
             Fire();
         }
