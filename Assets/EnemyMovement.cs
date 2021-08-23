@@ -4,57 +4,69 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public GameObject Enemy;
-    GameObject temp;
+    public GameObject EnemyObj;
     private int i = 0;
-    public GameObject prefab,prefab2;
+    public GameObject prefab;
     public Transform[] enemyPos;
-
+    public struct Enemy{
+        public static int Hp=100;
+        public static float Speed=300;
+    }
     private void GenerateEnemy()
     {
         if (i <= 5 && i >= 0)
         {
-            prefab = GameObject.Instantiate(Enemy, enemyPos[i].position, Quaternion.identity);
+            prefab = GameObject.Instantiate(EnemyObj, enemyPos[i].position, Quaternion.identity);
             i++;
         }
         else if(i>5 && i < 0)
         {
             i = 0;
         }
-        else
+        if (prefab != null)
         {
-            return;
+            prefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(-Enemy.Speed * Time.deltaTime, 0));
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet") && prefab.transform.localScale.x >= 0.5)
+        if (prefab != null)
         {
-            GenerateEnemy();
-            GenerateEnemy();
-
-            prefab.transform.localScale=new Vector3(prefab.transform.localScale.x*0.75f, prefab.transform.localScale.y*0.75f,0);
-
-            if (!prefab.GetComponent<CircleCollider2D>().enabled)
+            if (prefab != null && collision.gameObject.CompareTag("Bullet") && Enemy.Hp > 0)
             {
-                prefab.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
+                GenerateEnemy();
+                GenerateEnemy();
+
+                prefab.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
+
+                if (!prefab.GetComponent<CircleCollider2D>().enabled)
+                {
+                    prefab.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
+                }
+                Destroy(EnemyObj);
+
+                //prefab2 = GameObject.Instantiate(temp, Vector3.zero, Quaternion.identity, transform);
+
+                //prefab2.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
+                //prefab2.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
+
+
             }
-            Destroy(Enemy);
-
-            //prefab2 = GameObject.Instantiate(temp, Vector3.zero, Quaternion.identity, transform);
-
-            //prefab2.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
-            //prefab2.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
-
-
+            else if (collision.gameObject.CompareTag("Player"))
+                {
+                //player will lose hp maybe give bomb for faster clear.
+                Destroy(EnemyObj);
+                }
+            else 
+            {
+                Destroy(EnemyObj);
+            }
         }
-        else
-        {
-            Destroy(Enemy);
-        }
-    }
-    //public static void EnemySpawn()
-    //{
-    //    GameObject.Instantiate(Enemy);
-    //}
+        else if(EnemyObj != null)
+            Destroy(EnemyObj);
+
+        return;
+     }
 }
+
