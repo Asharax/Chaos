@@ -4,24 +4,48 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public static GameObject Enemy;
-    public GameObject prefab;//,prefab2;
+    public GameObject Enemy;
+    GameObject temp;
+    private int i = 0;
+    public GameObject prefab,prefab2;
+    public Transform[] enemyPos;
 
-    public Transform enemyPos;
+    private void GenerateEnemy()
+    {
+        if (i <= 5 && i >= 0)
+        {
+            prefab = GameObject.Instantiate(Enemy, enemyPos[i].position, Quaternion.identity);
+            i++;
+        }
+        else if(i>5 && i < 0)
+        {
+            i = 0;
+        }
+        else
+        {
+            return;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet") && prefab.transform.localScale.x >= 0.25)
+        if (collision.gameObject.CompareTag("Bullet") && prefab.transform.localScale.x >= 0.5)
         {
-            Destroy(Enemy);
-
-            prefab = GameObject.Instantiate(Enemy);
+            GenerateEnemy();
+            GenerateEnemy();
 
             prefab.transform.localScale=new Vector3(prefab.transform.localScale.x*0.75f, prefab.transform.localScale.y*0.75f,0);
-            prefab.GetComponent<CircleCollider2D>().enabled=!prefab.GetComponent<CircleCollider2D>().enabled;
 
-            //prefab2 = GameObject.Instantiate(Enemy, enemyPos);
-            //prefab2.transform.localScale = prefab.transform.localScale;
-            //prefab2.GetComponent<CircleCollider2D>().enabled = !prefab2.GetComponent<CircleCollider2D>().enabled;
+            if (!prefab.GetComponent<CircleCollider2D>().enabled)
+            {
+                prefab.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
+            }
+            Destroy(Enemy);
+
+            //prefab2 = GameObject.Instantiate(temp, Vector3.zero, Quaternion.identity, transform);
+
+            //prefab2.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
+            //prefab2.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
+
 
         }
         else
