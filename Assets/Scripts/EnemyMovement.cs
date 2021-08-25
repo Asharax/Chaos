@@ -5,98 +5,53 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject enemyObj;
-    public static int i = 0,enemyCnt=0;
-    public static GameObject prefab;
+    public int enemyCnt=0,i=0;
     public Transform[] enemyPos;
     public GameObject Player;
-    static int enemyLimit = 400;
+    public int enemyLimit = 100;
 
-
-
-    public struct Enemy
+    private void DamageEnemy(GameObject obj ,int dmg)
     {
-        public static int Hp;
-        public static float Speed;
-        public static int Damage ;
-        
-    }
-    private void Start()
-    {
-        Enemy.Hp = 100;
-        Enemy.Speed = 6000;
-        Enemy.Damage = 100;
-    }
-    private void Update()
-    {
-        Debug.Log("Enemy info:" + Enemy.Hp);
-        if (Enemy.Hp <= 0)
+        Debug.Log("EnemyHP: " + EnemyInfo.Enemy.Hp);
+        if (EnemyInfo.Enemy.Hp > 0)
         {
-            GenerateEnemy(enemyObj, enemyPos);
-            GenerateEnemy(enemyObj, enemyPos);
-
-            prefab.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
-
-            if (!prefab.GetComponent<CircleCollider2D>().enabled)
-            {
-                prefab.GetComponent<CircleCollider2D>().enabled = !prefab.GetComponent<CircleCollider2D>().enabled;
-            }
-            Destroy(enemyObj);
+            EnemyInfo.Enemy.Hp -= dmg;
         }
+        if (EnemyInfo.Enemy.Hp <= 0 && this.gameObject != null)
+        {
 
-    }
-    private void DamageEnemy(int dmg)
-    {
-        Debug.Log("EnemyHP: " + Enemy.Hp);
-        if (Enemy.Hp > 0)
-        {
-            Enemy.Hp -= dmg;
-        }   
-    }
-    public static void GenerateEnemy(GameObject enemyObj, Transform[] enemyPos)
-        {
-        if (enemyCnt < enemyLimit) { 
-            prefab = GameObject.Instantiate(enemyObj, enemyPos[i%8].position, Quaternion.identity);
+            //NEW Problem, might need fixing.
+            EnemyGenerator enemyGen = new EnemyGenerator();
+            enemyGen.GenerateEnemy(this.gameObject, enemyPos, 2);
+
+            transform.localScale = new Vector3(this.gameObject.transform.localScale.x * (EnemyInfo.Enemy.Hp / 100), this.transform.localScale.y * (EnemyInfo.Enemy.Hp / 100), 0);
+
+            Destroy(obj);
+            //enemyCnt--;
+            //enemyCnt++;
             enemyCnt++;
-            Debug.Log(enemyCnt);
-            i++;
-            if (prefab != null)
-            {
-                prefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(-Enemy.Speed * Time.deltaTime, 0));
-            }
         }
-    }
-    public static void GenerateEnemy(GameObject enemyObj, Transform[] enemyPos, int i)
-    {
-        if (enemyCnt < enemyLimit)
-        {
-            prefab = GameObject.Instantiate(enemyObj, enemyPos[i % 8].position, Quaternion.identity);
-            enemyCnt++;
-            Debug.Log("Enemy Counter:" + enemyCnt);
-            i++;
-            if (prefab != null)
-            {
-                prefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(-Enemy.Speed * Time.deltaTime, 0));
-            }
-        }
-    }
 
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (prefab != null)
-        {
-            if (collision.gameObject.CompareTag("Bullet") && Enemy.Hp > 0)
-            {
-                DamageEnemy(Playerinf.Player.Dmg);
-                prefab.transform.localScale = new Vector3(prefab.transform.localScale.x * 0.75f, prefab.transform.localScale.y * 0.75f, 0);
-            }
-        }
-       
+
+        if (collision.gameObject.CompareTag("Bullet") && EnemyInfo.Enemy.Hp > 0)
+         {
+                DamageEnemy(this.gameObject,Playerinf.Player.Dmg);
+                transform.localScale = new Vector3(this.gameObject.transform.localScale.x * 0.75f, this.gameObject.transform.localScale.y * 0.75f, 0);
+         }
+
         else if (collision.gameObject.CompareTag("Player"))
-        {
-            DamageEnemy(Playerinf.Player.Dmg);
-            Player.GetComponent<Playerinf>().DamagePlayer(Enemy.Damage);
-            Destroy(enemyObj);
-        }    
+        {   
+                DamageEnemy(this.gameObject,Playerinf.Player.HitDmg);
+                Playerinf.DamagePlayer(EnemyInfo.Enemy.Damage);
+        }
+
+        Debug.Log("Enemy info:" + EnemyInfo.Enemy.Hp);
+        
+
     }
 }
 

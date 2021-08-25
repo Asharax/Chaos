@@ -4,30 +4,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class Playerinf : MonoBehaviour
+public class Playerinf : SceneManagement
 {
     public GameObject PlayerObj;
+
 
     public struct Player
     {
         public static int Hp = 100;
         public static float Speed = 2000;
         public static int Dmg = 50;
+        public static int HitDmg = 50;
+
 
     }
     void Update()
     {
-        Debug.Log("Player HP:"+Player.Hp);
-
+        
+        Debug.Log("Player HP:" +Player.Hp);
         if (Player.Hp <= 0)
-        {
-            //restart the game & death screen
-            //SceneManager.LoadScene("Main Menu");
+        { 
             Debug.Log("Gameover!");
+            Destroy(gameObject);
+            ReloadScene();
 
         }
     }
-    public void DamagePlayer(int Dmg)
+    public static void DamagePlayer(int Dmg)
     {
         Player.Hp -= Dmg;
     }
