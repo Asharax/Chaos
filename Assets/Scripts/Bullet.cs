@@ -19,13 +19,13 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Wall"))
         {
-           // EnemyMovement.EnemySpawn();
             Destroy(bullet,0);
         }
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(bullet, 0);
             //enemy'i küçült
         }
-    }
+    } 
 }
