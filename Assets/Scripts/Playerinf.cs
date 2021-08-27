@@ -1,28 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class Playerinf : SceneManagement
 {
-    public GameObject PlayerObj;
+    public GameObject PlayerObj,Enemy;
+    public Text TextHP;
+    public int playerHP = 100;
+    public int playerSpeed = 2000;
+    public int playerDmg = 50;
+    public int playerHitDmg = 50;
+    int eDamage;
 
-
-    public struct Player
+   private void Start()
     {
-        public static int Hp = 100;
-        public static float Speed = 2000;
-        public static int Dmg = 50;
-        public static int HitDmg = 50;
-
-
+        eDamage = Enemy.GetComponent<EnemyInfo>().EnemyDamage;
     }
     void Update()
     {
-        
-        Debug.Log("Player HP:" +Player.Hp);
-        if (Player.Hp <= 0)
+        TextHP.text = "HP: " + playerHP.ToString();
+        Debug.Log(TextHP.text.ToString());
+
+        if (playerHP <= 0)
         { 
             Debug.Log("Gameover!");
             Destroy(gameObject);
@@ -30,8 +32,16 @@ public class Playerinf : SceneManagement
 
         }
     }
-    public static void DamagePlayer(int Dmg)
+    public void DamagePlayer(int Dmg)
     {
-        Player.Hp -= Dmg;
+        playerHP -= Dmg;
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            DamagePlayer(eDamage);
+        }
     }
 }

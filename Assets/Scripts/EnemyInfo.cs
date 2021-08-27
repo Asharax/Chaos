@@ -4,26 +4,12 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
+    public int EnemyHp,EnemySpeed,EnemyDamage;
 
-    public struct Enemy
-    {
-        public static int Hp;
-        public static float Speed;
-        public static int Damage;
-
-    }
-    // Start is called before the first frame update
     void Start()
     {
-
-        Enemy.Hp = 100;
-        Enemy.Speed = 6000;
-        Enemy.Damage = 100;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        EnemyHp = 100;
+        EnemySpeed = 60000;
+        EnemyDamage = 100;
     }
 }
